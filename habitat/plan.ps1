@@ -11,9 +11,10 @@ $pkg_fileame=@("TortoiseSVN-1.9.7.27907-x64-svn-1.9.7.msi")
 function Invoke-Unpack {
   lessmsi x (Resolve-Path "$HAB_CACHE_SRC_PATH/$pkg_filename").Path
   mkdir "$HAB_CACHE_SRC_PATH/$pkg_dirname"
-  Move-Item "TortoiseSVN-1.9.7.27907-x64-svn-1.9.7\SourceDir\Program Files\TortoiseSVN\" "$HAB_CACHE_SRC_PATH/$pkg_dirname"
+  Copy-Item "TortoiseSVN-1.9.7.27907-x64-svn-1.9.7\SourceDir\Program Files\TortoiseSVN" "$HAB_CACHE_SRC_PATH/$pkg_dirname" -Recurse
+  Remove-Item "TortoiseSVN-1.9.7.27907-x64-svn-1.9.7" -Recurse
 }
 
 function Invoke-Install {
-  Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/bin/*" "$pkg_prefix" -Recurse -Force
+  Copy-Item "$HAB_CACHE_SRC_PATH/$pkg_dirname/TortoiseSVN/bin/*" "$pkg_prefix" -Recurse -Force
 }
